@@ -181,11 +181,11 @@ void BuildStatus::RestartStillRunningDelay()
 
 void BuildStatus::BuildEdgeRunningSolo(Edge* edge, const string& output)
 {
-  if (config_.verbosity == BuildConfig::QUIET || !printer_.is_smart_terminal())
+  if (config_.verbosity == BuildConfig::QUIET)
     return;
 
   if (output.size() > solo_bytes_printed_) {
-    if (solo_bytes_printed_ == 0) {
+    if (solo_bytes_printed_ == 0 && printer_.is_smart_terminal()) {
       // Print edge description before starting to print its output
       PrintStatus(edge, "\n");
     }
